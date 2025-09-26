@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Orders - MIKAMATA Admin</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <link rel="stylesheet" href="admin.css"/>
+  <link rel="stylesheet" href="orders.css"/>
+  <style>
+    body {
+      zoom: 80%;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <img src="../mik/logo.png" alt="MIKAMATA Logo" class="admin-logo">
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+          <li><a href="products.html"><i class="fas fa-cubes"></i> <span>Products</span></a></li>
+          <li><a href="orders.html" class="active"><i class="fas fa-shopping-cart"></i> <span>Orders</span></a></li>
+          <li><a href="customers.html"><i class="fas fa-user-group"></i> <span>Users</span></a></li>
+          <li><a href="tutorials.html"><i class="fas fa-book-open"></i> <span>Tutorials</span></a></li>
+          <li><a href="reviews.html"><i class="fas fa-star"></i> <span>Reviews</span></a></li>
+          <li><a href="notifications.html"><i class="fas fa-bell"></i> <span>Notifications</span></a></li>
+          <li><a href="activity-logs.html"><i class="fas fa-clipboard-list"></i> <span>Activity Logs</span></a></li>
+        </ul>
+        <div class="sidebar-bottom-nav">
+          <ul>
+          <li><a href="settings.html"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+          <li><a href="#" id="admin-logout-btn"><i class="fas fa-right-from-bracket"></i> <span>Logout</span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main-content">
+      <header class="admin-main-header">
+        <div>
+          <nav class="breadcrumbs as-title">
+            <a href="dashboard.html">Dashboard</a>
+            <span class="separator">&gt;</span>
+            <span>Orders</span>
+          </nav>
+          <p id="current-date"></p>
+        </div>
+      </header>
+
+      <!-- <CHANGE> Added comprehensive order statistics cards -->
+      <section class="orders-stats">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon pending">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="stat-info">
+              <h3 id="pending-orders-count">0</h3>
+              <p>Pending Orders</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon processing">
+              <i class="fas fa-cog"></i>
+            </div>
+            <div class="stat-info">
+              <h3 id="processing-orders-count">0</h3>
+              <p>Processing</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon shipped">
+              <i class="fas fa-truck"></i>
+            </div>
+            <div class="stat-info">
+              <h3 id="shipped-orders-count">0</h3>
+              <p>Shipped</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon delivered">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="stat-info">
+              <h3 id="delivered-orders-count">0</h3>
+              <p>Delivered</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bulk Actions Bar -->
+      <div class="bulk-actions-bar" id="bulk-actions-bar" style="display: none;">
+        <span id="bulk-selected-count">0 orders selected</span>
+        <div class="bulk-buttons">
+          <button class="btn btn-secondary" id="bulk-update-status-btn"><i class="fas fa-edit"></i> Update Status</button>
+          <button class="btn btn-danger" id="bulk-cancel-btn"><i class="fas fa-times"></i> Cancel Orders</button>
+        </div>
+      </div>
+
+      <!-- Orders Table -->
+      <section class="admin-section">
+        <div class="section-header">
+          <div class="section-controls">
+            <div class="search-box">
+              <i class="fas fa-search"></i>
+              <input type="text" placeholder="Search by Order ID or Customer Name" id="order-search">
+            </div>
+            <div class="filter-group">
+              <!-- Date Range Picker (conceptual) -->
+              <div class="date-range-filter">
+                <i class="fas fa-calendar-alt"></i>
+                <input type="text" id="date-range-picker" class="filter-select" placeholder="Select Date Range">
+              </div>
+              <select id="status-filter" class="filter-select">
+                <option value="">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="processing">Processing</option>
+                <option value="completed">Completed</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+              <select id="payment-filter" class="filter-select">
+                <option value="">All Payments</option>
+                <option value="gcash">GCash</option>
+                <option value="paymaya">PayMaya</option>
+                <option value="cod">Cash on Delivery</option>
+              </select>
+              <button class="btn btn-secondary" id="export-orders"><i class="fas fa-download"></i> Export</button>
+              <button class="btn btn-outline" id="refresh-orders"><i class="fas fa-refresh"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- <CHANGE> Enhanced table with bulk selection and comprehensive order data -->
+        <div class="table-responsive" id="orders-table-view">
+          <table class="orders-table">
+            <thead>
+              <tr>
+                <th>
+                  <input type="checkbox" id="select-all-orders">
+                </th>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Date</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Payment</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="orders-table-body">
+              <!-- Sample orders data -->
+              <tr>
+                <td><input type="checkbox" class="order-checkbox" data-id="ORD-001"></td>
+                <td><span class="order-id">#ORD-001</span></td>
+                <td>
+                  <div class="customer-info">
+                    <div>
+                      <div class="customer-name">John Doe</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="order-date">
+                    <div>Dec 15, 2024</div>
+                    <div class="order-time">2:30 PM</div>
+                  </div>
+                </td>
+                <td><span class="item-count">3 items</span></td>
+                <td><span class="order-total">₱1,899.50</span></td>
+                <td><span class="payment-method gcash">GCash</span></td>
+                <td><span class="order-status processing">Processing</span></td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn btn-sm btn-icon view-btn" title="View Order"><i class="fas fa-eye"></i></button>
+                    <button class="btn btn-sm btn-icon edit-btn" title="Edit Order"><i class="fas fa-edit"></i></button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="order-checkbox" data-id="ORD-002"></td>
+                <td><span class="order-id">#ORD-002</span></td>
+                <td>
+                  <div class="customer-info">
+                    <div>
+                      <div class="customer-name">Jane Smith</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="order-date">
+                    <div>Dec 14, 2024</div>
+                    <div class="order-time">11:45 AM</div>
+                  </div>
+                </td>
+                <td><span class="item-count">1 item</span></td>
+                <td><span class="order-total">₱550.00</span></td>
+                <td><span class="payment-method cod">COD</span></td>
+                <td><span class="order-status completed">Completed</span></td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn btn-sm btn-icon view-btn" title="View Order"><i class="fas fa-eye"></i></button>
+                    <button class="btn btn-sm btn-icon edit-btn" title="Edit Order"><i class="fas fa-edit"></i></button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="order-checkbox" data-id="ORD-003"></td>
+                <td><span class="order-id">#ORD-003</span></td>
+                <td>
+                  <div class="customer-info">
+                    <div>
+                      <div class="customer-name">Robert Brown</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="order-date">
+                    <div>Dec 14, 2024</div>
+                    <div class="order-time">9:10 AM</div>
+                  </div>
+                </td>
+                <td><span class="item-count">5 items</span></td>
+                <td><span class="order-total">₱3,200.00</span></td>
+                <td><span class="payment-method paymaya">PayMaya</span></td>
+                <td><span class="order-status pending">Pending</span></td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn btn-sm btn-icon view-btn" title="View Order"><i class="fas fa-eye"></i></button>
+                    <button class="btn btn-sm btn-icon edit-btn" title="Edit Order"><i class="fas fa-edit"></i></button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="order-checkbox" data-id="ORD-004"></td>
+                <td><span class="order-id">#ORD-004</span></td>
+                <td>
+                  <div class="customer-info">
+                    <div>
+                      <div class="customer-name">Emily White</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="order-date">
+                    <div>Dec 13, 2024</div>
+                    <div class="order-time">5:00 PM</div>
+                  </div>
+                </td>
+                <td><span class="item-count">2 items</span></td>
+                <td><span class="order-total">₱1,150.00</span></td>
+                <td><span class="payment-method gcash">GCash</span></td>
+                <td><span class="order-status cancelled">Cancelled</span></td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn btn-sm btn-icon view-btn" title="View Order"><i class="fas fa-eye"></i></button>
+                    <button class="btn btn-sm btn-icon edit-btn" title="Edit Order"><i class="fas fa-edit"></i></button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="order-checkbox" data-id="ORD-005"></td>
+                <td><span class="order-id">#ORD-005</span></td>
+                <td>
+                  <div class="customer-info">
+                    <div>
+                      <div class="customer-name">Michael Green</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="order-date">
+                    <div>Dec 12, 2024</div>
+                    <div class="order-time">8:20 AM</div>
+                  </div>
+                </td>
+                <td><span class="item-count">4 items</span></td>
+                <td><span class="order-total">₱2,500.00</span></td>
+                <td><span class="payment-method cod">COD</span></td>
+                <td><span class="order-status completed">Completed</span></td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn btn-sm btn-icon view-btn" title="View Order"><i class="fas fa-eye"></i></button>
+                    <button class="btn btn-sm btn-icon edit-btn" title="Edit Order"><i class="fas fa-edit"></i></button>
+                  </div>
+                </td>
+              </tr>
+              <!-- More sample orders would be here -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-wrapper" id="pagination-wrapper">
+          <div class="pagination-info">
+            Showing 1-10 of 156 orders
+          </div>
+          <div class="pagination">
+            <button class="page-btn" disabled><i class="fas fa-chevron-left"></i></button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">...</button>
+            <button class="page-btn">16</button>
+            <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- <CHANGE> Enhanced order details modal with comprehensive information -->
+  <div id="order-detail-modal" class="modal">
+    <div class="modal-content large">
+      <div class="modal-header">
+        <h3>Order Details #<span id="modal-order-id"></span></h3>
+        <span class="close" onclick="closeOrderDetailModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="order-detail-layout">
+          <div class="order-detail-main">
+            <!-- Order Items -->
+            <div class="details-section">
+              <h4><i class="fas fa-list"></i> Order Items (<span id="modal-item-count">0</span>)</h4>
+              <div id="modal-order-items-list" class="order-items-list">
+                <!-- More items here -->
+                <!-- Items will be dynamically inserted by JS -->
+              </div>
+            </div>
+          </div>
+
+          <div class="order-detail-sidebar">
+            <!-- Customer Info Card -->
+            <div class="details-section">
+              <h4><i class="fas fa-user"></i> Customer</h4>
+              <div class="detail-row"><strong>Name:</strong> <span id="modal-customer-name"></span></div>
+              <div class="detail-row"><strong>Email:</strong> <span id="modal-customer-email"></span></div>
+              <div class="detail-row"><strong>Contact:</strong> <span id="modal-customer-phone"></span></div>
+              <div class="detail-row"><strong>Shipping:</strong> <span id="modal-shipping-address"></span></div>
+            </div>
+
+            <!-- Totals Card -->
+            <div class="details-section">
+              <h4><i class="fas fa-receipt"></i> Totals</h4>
+              <div class="totals-summary" id="modal-totals-summary">
+                <!-- Totals will be dynamically inserted by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <NEW> Edit Order Modal -->
+  <div id="order-edit-modal" class="modal">
+    <div class="modal-content large">
+      <div class="modal-header">
+        <h3>Edit Order #<span id="edit-modal-order-id"></span></h3>
+        <span class="close" onclick="closeOrderEditModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <!-- Order Timeline -->
+        <div class="details-section">
+          <h4><i class="fas fa-history"></i> Order Timeline</h4>
+          <div class="order-timeline horizontal" id="edit-modal-timeline">
+            <!-- Timeline items will be dynamically inserted by JS -->
+          </div>
+        </div>
+
+      </div>
+      <!-- Status Update Footer -->
+      <div class="modal-footer">
+        <label for="edit-modal-order-status">Update Status:</label>
+        <div class="update-status-group">
+          <select id="edit-modal-order-status" class="form-input">
+            <option value="pending">Pending</option>
+            <option value="processing">Processing</option>
+            <option value="shipped">Shipped</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" id="edit-modal-update-status-btn">Update Status</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="orders.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

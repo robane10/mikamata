@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - MIKAMATA Admin</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="admin.css">
+  <style>
+    body {
+      zoom: 80%;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <img src="../mik/logo.png" alt="MIKAMATA Logo" class="admin-logo">
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+          <li><a href="products.html"><i class="fas fa-cubes"></i> <span>Products</span></a></li>
+          <li><a href="orders.html"><i class="fas fa-shopping-cart"></i> <span>Orders</span></a></li>
+          <li><a href="customers.html"><i class="fas fa-user-group"></i> <span>Customers</span></a></li>
+          <li><a href="tutorials.html"><i class="fas fa-book-open"></i> <span>Tutorials</span></a></li>
+          <li><a href="reviews.html"><i class="fas fa-star"></i> <span>Reviews</span></a></li>
+          <li><a href="notifications.html"><i class="fas fa-bell"></i> <span>Notifications</span></a></li>
+          <li><a href="activity-logs.html"><i class="fas fa-clipboard-list"></i> <span>Activity Logs</span></a></li>
+        </ul>
+        <div class="sidebar-bottom-nav">
+          <ul>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+            <li><a href="#" id="admin-logout-btn"><i class="fas fa-right-from-bracket"></i> <span>Logout</span></a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main-content">
+      <header class="admin-main-header">
+        <div>
+          <h1>Welcome to MIKAMATA</h1>
+          <p id="current-date">Loading...</p>
+          <p id="current-time"></p>
+        </div>
+        <div class="header-right-actions">
+          <div class="header-icon-wrapper">
+            <button class="header-icon-btn" title="Notifications" id="notification-icon-btn">
+              <i class="fas fa-bell"></i>
+              <span class="notification-badge">5</span>
+            </button>
+            <div class="notification-dropdown" id="notification-dropdown">
+              <div class="dropdown-header">
+                <h3>Notifications</h3>
+                <a href="notifications.html">View All</a>
+              </div>
+              <ul class="dropdown-list">
+                <li><a href="#" class="dropdown-item">
+                  <i class="fas fa-shopping-cart icon"></i>
+                  <div class="item-content">
+                    <p><strong>New Order:</strong> #1024 by Juan Dela Cruz</p>
+                    <span class="item-date">5 minutes ago</span>
+                  </div>
+                </a></li>
+                <li><a href="#" class="dropdown-item">
+                  <i class="fas fa-user-plus icon"></i>
+                  <div class="item-content">
+                    <p><strong>New Customer:</strong> Maria Santos registered</p>
+                    <span class="item-date">1 hour ago</span>
+                  </div>
+                </a></li>
+                <li><a href="#" class="dropdown-item">
+                  <i class="fas fa-star icon"></i>
+                  <div class="item-content">
+                    <p><strong>New Review:</strong> Bamboo Cup rated 5 stars</p>
+                    <span class="item-date">3 hours ago</span>
+                  </div>
+                </a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard Stats Overview -->
+      <div class="dashboard-top-row">
+        <section class="admin-section" style="background: none; border: none; box-shadow: none; padding: 0;">
+          <div class="dashboard-grid">
+            <div class="stat-card" style="padding: 1rem;">
+              <div class="stat-card-icon icon-sales" style="width: 45px; height: 45px; font-size: 1.2rem;">
+                <i class="fas fa-dollar-sign"></i>
+              </div>
+              <div class="stat-card-info">
+                <h3 style="font-size: 0.9rem;">Sales Today</h3>
+                <p data-stat="sales-today">₱0.00</p>
+                <div class="stat-comparison">
+                  <span class="percentage-up"><i class="fas fa-arrow-up"></i> 12%</span>
+                  <span>vs. yesterday</span>
+                </div>
+              </div>
+            </div>
+            <div class="stat-card" style="padding: 1rem;">
+              <div class="stat-card-icon icon-orders" style="width: 45px; height: 45px; font-size: 1.2rem;">
+                <i class="fas fa-shopping-cart"></i>
+              </div>
+              <div class="stat-card-info">
+                <h3 style="font-size: 0.9rem;">Orders This Week</h3>
+                <p data-stat="orders-week">0</p>
+                <div class="stat-comparison">
+                  <span class="percentage-down"><i class="fas fa-arrow-down"></i> 3%</span>
+                  <span>vs. last week</span>
+                </div>
+              </div>
+            </div>
+            <div class="stat-card" style="padding: 1rem;">
+              <div class="stat-card-icon icon-users" style="width: 45px; height: 45px; font-size: 1.2rem;">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="stat-card-info">
+                <h3 style="font-size: 0.9rem;">New Users</h3>
+                <p data-stat="new-users-month">0</p>
+                <div class="stat-comparison">
+                  <span class="percentage-up"><i class="fas fa-arrow-up"></i> 8%</span>
+                  <span>vs. last month</span>
+                </div>
+              </div>
+            </div>
+            <div class="stat-card" style="padding: 1rem;">
+              <div class="stat-card-icon icon-products" style="width: 45px; height: 45px; font-size: 1.2rem;">
+                <i class="fas fa-cubes"></i>
+              </div>
+              <div class="stat-card-info">
+                <h3 style="font-size: 0.9rem;">Total Products</h3>
+                <p data-stat="total-products">0</p>
+                <div class="stat-comparison">
+                  <span class="percentage-up"><i class="fas fa-arrow-up"></i> 15%</span>
+                  <span>vs. last year</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Analytics Charts -->
+      <div class="dashboard-analytics-row" style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px; align-items: flex-start;">
+        <section class="admin-section">
+          <h2>Monthly Sales Analytics</h2>
+          <div class="chart-container" style="height: 350px;">
+            <canvas id="salesChart"></canvas>
+          </div>
+        </section>
+
+        <section class="admin-section">
+          <h2>Top Categories</h2>
+          <div class="chart-container" style="height: 350px;">
+            <canvas id="topCategoriesChart"></canvas>
+          </div>
+        </section>
+      </div>
+
+      <section class="admin-section">
+        <h2>Most Selling Products</h2>
+        <div class="chart-container">
+          <canvas id="mostSellingProductsChart"></canvas>
+        </div>
+      </section>
+
+      <section class="admin-section">
+        <h2>Recent Activities</h2>
+        <ul class="recent-list">
+          <li>
+            <div>
+              <strong>New Order #1024</strong>
+              <p>Juan Dela Cruz placed an order for ₱2,450.00</p>
+            </div>
+            <span>5 min ago</span>
+          </li>
+          <li>
+            <div>
+              <strong>Product Added</strong>
+              <p>Bamboo Water Bottle added to inventory</p>
+            </div>
+            <span>1 hour ago</span>
+          </li>
+          <li>
+            <div>
+              <strong>Customer Review</strong>
+              <p>Maria Santos left a 5-star review</p>
+            </div>
+            <span>2 hours ago</span>
+          </li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <script src="dashboard.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

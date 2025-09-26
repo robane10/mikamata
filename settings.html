@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Settings - MIKAMATA Admin</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <link rel="stylesheet" href="admin.css"/>
+  <link rel="stylesheet" href="settings.css"/>
+  <style>
+    body {
+      zoom: 80%;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <img src="../mik/logo.png" alt="MIKAMATA Logo" class="admin-logo">
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+          <li><a href="products.html"><i class="fas fa-cubes"></i> <span>Products</span></a></li>
+          <li><a href="orders.html"><i class="fas fa-shopping-cart"></i> <span>Orders</span></a></li>
+          <li><a href="customers.html"><i class="fas fa-user-group"></i> <span>Users</span></a></li>
+          <li><a href="tutorials.html"><i class="fas fa-book-open"></i> <span>Tutorials</span></a></li>
+          <li><a href="reviews.html"><i class="fas fa-star"></i> <span>Reviews</span></a></li>
+          <li><a href="notifications.html"><i class="fas fa-bell"></i> <span>Notifications</span></a></li>
+          <li><a href="activity-logs.html"><i class="fas fa-clipboard-list"></i> <span>Activity Logs</span></a></li>
+        </ul>
+        <div class="sidebar-bottom-nav">
+          <ul>
+          <li><a href="settings.html" class="active"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+          <li><a href="#" id="admin-logout-btn"><i class="fas fa-right-from-bracket"></i> <span>Logout</span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main-content">
+      <header class="admin-main-header">
+        <div class="header-left">
+          <h1>Settings</h1>
+          <p id="current-date"></p>
+        </div>
+        <div class="header-right">
+          <div class="notification-dropdown">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Settings Navigation -->
+      <section class="settings-nav">
+        <div class="settings-tabs">
+          <button class="settings-tab active" data-tab="general">
+            <i class="fas fa-store"></i>
+            <span>General</span>
+          </button>
+          <button class="settings-tab" data-tab="payment">
+            <i class="fas fa-credit-card"></i>
+            <span>Payment</span>
+          </button>
+          <button class="settings-tab" data-tab="shipping">
+            <i class="fas fa-truck"></i>
+            <span>Shipping</span>
+          </button>
+          <button class="settings-tab" data-tab="tax">
+            <i class="fas fa-calculator"></i>
+            <span>Tax</span>
+          </button>
+          <button class="settings-tab" data-tab="email">
+            <i class="fas fa-envelope"></i>
+            <span>Email</span>
+          </button>
+          <button class="settings-tab" data-tab="security">
+            <i class="fas fa-shield-alt"></i>
+            <span>Security</span>
+          </button>
+          <button class="settings-tab" data-tab="integrations">
+            <i class="fas fa-plug"></i>
+            <span>Integrations</span>
+          </button>
+          <button class="settings-tab" data-tab="system">
+            <i class="fas fa-server"></i>
+            <span>System</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- General Settings -->
+      <section class="settings-content active" id="general-settings">
+        <div class="settings-section">
+          <div class="section-header">
+            <h2><i class="fas fa-store"></i> Store Information</h2>
+            <p>Basic information about your store</p>
+          </div>
+          <div class="settings-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="store-name">Store Name</label>
+                <input type="text" id="store-name" class="form-input" value="MIKAMATA" required>
+              </div>
+              <div class="form-group">
+                <label for="store-tagline">Tagline</label>
+                <input type="text" id="store-tagline" class="form-input" value="Your Premium Electronics Store">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="store-description">Store Description</label>
+              <textarea id="store-description" class="form-input" rows="4">Premium electronics and gadgets for modern lifestyle. We offer the latest technology products with excellent customer service.</textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="store-email">Contact Email</label>
+                <input type="email" id="store-email" class="form-input" value="info@mikamata.com" required>
+              </div>
+              <div class="form-group">
+                <label for="store-phone">Phone Number</label>
+                <input type="tel" id="store-phone" class="form-input" value="+63 912 345 6789">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="store-address">Store Address</label>
+              <textarea id="store-address" class="form-input" rows="3">123 Tech Street, Makati City, Metro Manila, Philippines 1200</textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="store-currency">Default Currency</label>
+                <select id="store-currency" class="form-input">
+                  <option value="PHP" selected>Philippine Peso (₱)</option>
+                  <option value="USD">US Dollar ($)</option>
+                  <option value="EUR">Euro (€)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="store-timezone">Timezone</label>
+                <select id="store-timezone" class="form-input">
+                  <option value="Asia/Manila" selected>Asia/Manila (GMT+8)</option>
+                  <option value="UTC">UTC (GMT+0)</option>
+                  <option value="America/New_York">America/New_York (GMT-5)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <div class="section-header">
+            <h2><i class="fas fa-image"></i> Store Branding</h2>
+            <p>Upload your store logo and customize appearance</p>
+          </div>
+          <div class="settings-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Store Logo</label>
+                <div class="logo-upload">
+                  <div class="logo-preview">
+                    <img src="../mik/logo.png" alt="Current Logo" id="logo-preview">
+                  </div>
+                  <div class="upload-controls">
+                    <input type="file" id="logo-upload" accept="image/*" hidden>
+                    <button type="button" class="btn btn-outline" onclick="document.getElementById('logo-upload').click()">
+                      <i class="fas fa-upload"></i> Upload Logo
+                    </button>
+                    <p class="upload-hint">Recommended: 200x60px, PNG or JPG</p>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Favicon</label>
+                <div class="favicon-upload">
+                  <div class="favicon-preview" style="background-color: #eee;">
+                    <img src="../placeholder.svg?height=32&width=32" alt="Favicon" id="favicon-preview">
+                  </div>
+                  <div class="upload-controls">
+                    <input type="file" id="favicon-upload" accept="image/*" hidden>
+                    <button type="button" class="btn btn-outline" onclick="document.getElementById('favicon-upload').click()">
+                      <i class="fas fa-upload"></i> Upload Favicon
+                    </button>
+                    <p class="upload-hint">32x32px, ICO or PNG</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="primary-color">Primary Color</label>
+                <div class="color-input">
+                  <input type="color" id="primary-color" value="#3b82f6">
+                  <input type="text" class="form-input" value="#3b82f6">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="secondary-color">Secondary Color</label>
+                <div class="color-input">
+                  <input type="color" id="secondary-color" value="#64748b">
+                  <input type="text" class="form-input" value="#64748b">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary">Reset</button>
+          <button type="button" class="btn btn-primary">Save Changes</button>
+        </div>
+      </section>
+
+      <!-- Payment Settings -->
+      <section class="settings-content" id="payment-settings">
+        <div class="settings-section">
+          <div class="section-header">
+            <h2><i class="fas fa-credit-card"></i> Payment Methods</h2>
+            <p>Configure payment gateways and methods</p>
+          </div>
+          <div class="payment-methods">
+            <div class="payment-method">
+              <div class="method-header">
+                <div class="method-info">
+                  <img src="../placeholder.svg?height=40&width=60" alt="GCash" class="method-logo">
+                  <div>
+                    <h4>GCash</h4>
+                    <p>Accept GCash payments (Philippines)</p>
+                  </div>
+                </div>
+                <div class="method-toggle">
+                  <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="method-config">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="gcash-merchant-id">Merchant ID</label>
+                    <input type="text" id="gcash-merchant-id" class="form-input" placeholder="Enter GCash Merchant ID">
+                  </div>
+                  <div class="form-group">
+                    <label for="gcash-api-key">API Key</label>
+                    <input type="password" id="gcash-api-key" class="form-input" placeholder="Enter GCash API Key">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="payment-method">
+              <div class="method-header">
+                <div class="method-info">
+                  <img src="../placeholder.svg?height=40&width=60" alt="PayMaya" class="method-logo">
+                  <div>
+                    <h4>PayMaya</h4>
+                    <p>Accept PayMaya payments</p>
+                  </div>
+                </div>
+                <div class="method-toggle">
+                  <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="method-config">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="paymaya-public-key">Public Key</label>
+                    <input type="text" id="paymaya-public-key" class="form-input" placeholder="Enter PayMaya Public Key">
+                  </div>
+                  <div class="form-group">
+                    <label for="paymaya-secret-key">Secret Key</label>
+                    <input type="password" id="paymaya-secret-key" class="form-input" placeholder="Enter PayMaya Secret Key">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="payment-method">
+              <div class="method-header">
+                <div class="method-info">
+                  <img src="../placeholder.svg?height=40&width=60" alt="COD" class="method-logo">
+                  <div>
+                    <h4>Cash on Delivery</h4>
+                    <p>Accept cash upon delivery</p>
+                  </div>
+                </div>
+                <div class="method-toggle">
+                  <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary">Test Connection</button>
+          <button type="button" class="btn btn-primary">Save Payment Settings</button>
+        </div>
+      </section>
+
+      <!-- Shipping Settings -->
+      <section class="settings-content" id="shipping-settings">
+        <div class="settings-section">
+          <div class="section-header">
+            <h2><i class="fas fa-truck"></i> Shipping Zones</h2>
+            <p>Configure shipping zones and rates</p>
+          </div>
+          <div class="shipping-zones">
+            <div class="zone-header">
+              <button class="btn btn-primary" onclick="addShippingZone()">
+                <i class="fas fa-plus"></i> Add Shipping Zone
+              </button>
+            </div>
+            <div class="zones-list">
+              <div class="shipping-zone">
+                <div class="zone-info">
+                  <h4>Metro Manila</h4>
+                  <p>NCR, Quezon City, Makati, Taguig, Pasig</p>
+                </div>
+                <div class="zone-rates">
+                  <span class="rate">₱150 - Standard</span>
+                  <span class="rate">₱300 - Express</span>
+                </div>
+                <div class="zone-actions">
+                  <button class="btn btn-sm btn-outline" onclick="editShippingZone('zone-1')">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn btn-sm btn-outline" onclick="deleteShippingZone('zone-1')">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="shipping-zone">
+                <div class="zone-info">
+                  <h4>Luzon</h4>
+                  <p>All provinces in Luzon except NCR</p>
+                </div>
+                <div class="zone-rates">
+                  <span class="rate">₱200 - Standard</span>
+                  <span class="rate">₱400 - Express</span>
+                </div>
+                <div class="zone-actions">
+                  <button class="btn btn-sm btn-outline" onclick="editShippingZone('zone-2')">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn btn-sm btn-outline" onclick="deleteShippingZone('zone-2')">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <div class="section-header">
+            <h2><i class="fas fa-box"></i> Shipping Options</h2>
+            <p>General shipping configuration</p>
+          </div>
+          <div class="settings-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="free-shipping-threshold">Free Shipping Threshold</label>
+                <input type="number" id="free-shipping-threshold" class="form-input" value="2000" min="0">
+                <small>Orders above this amount get free shipping</small>
+              </div>
+              <div class="form-group">
+                <label for="processing-time">Processing Time (days)</label>
+                <input type="number" id="processing-time" class="form-input" value="1" min="0" max="30">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>
+                <input type="checkbox" checked>
+                Enable order tracking
+              </label>
+            </div>
+            <div class="form-group">
+              <label>
+                <input type="checkbox">
+                Require signature on delivery
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary">Reset</button>
+          <button type="button" class="btn btn-primary">Save Shipping Settings</button>
+        </div>
+      </section>
+
+      <!-- Tax Settings -->
+      <section class="settings-content" id="tax-settings">
+        <div class="settings-section">
+          <div class="section-header">
+            <h2><i class="fas fa-calculator"></i> Tax Configuration</h2>
+            <p>Configure tax rates and rules</p>
+          </div>
+          <div class="settings-form">
+            <div class="form-group">
+              <label>
+                <input type="checkbox" id="enable-tax" checked>
+                Enable tax calculation
+              </label>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="default-tax-rate">Default Tax Rate (%)</label>
+                <input type="number" id="default-tax-rate" class="form-input" value="12" min="0" max="100" step="0.01">
+                <small>VAT rate in Philippines is 12%</small>
+              </div>
+              <div class="form-group">
+                <label for="tax-display">Tax Display</label>
+                <select id="tax-display" class="form-input">
+                  <option value="inclusive">Inclusive of tax</option>
+                  <option value="exclusive" selected>Exclusive of tax</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="tax-number">Tax Registration Number</label>
+              <input type="text" id="tax-number" class="form-input" placeholder="Enter your BIR TIN">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary">Reset</button>
+          <button type="button" class="btn btn-primary">Save Tax Settings</button>
+        </div>
+      </section>
+
+      <!-- Email Settings -->
+      <section class="settings-content" id="email-settings">
+        <div class="settings-section">
+          <div class="section-header">
+            <h2><i class="fas fa-envelope"></i> Email Configuration</h2>
+            <p>Configure SMTP settings and email templates</p>
+          </div>
+          <div class="settings-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="smtp-host">SMTP Host</label>
+                <input type="text" id="smtp-host" class="form-input" placeholder="smtp.gmail.com">
+              </div>
+              <div class="form-group">
+                <label for="smtp-port">SMTP Port</label>
+                <input type="number" id="smtp-port" class="form-input" value="587">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="smtp-username">Username</label>
+                <input type="email" id="smtp-username" class="form-input" placeholder="your-email@gmail.com">
+              </div>
+              <div class="form-group">
+                <label for="smtp-password">Password</label>
+                <input type="password" id="smtp-password" class="form-input" placeholder="App password">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="from-email">From Email</label>
+              <input type="email" id="from-email" class="form-input" value="noreply@mikamata.com">
+            </div>
+            <div class="form-group">
+              <label for="from-name">From Name</label>
+              <input type="text" id="from-name" class="form-input" value="MIKAMATA Store">
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <div class="section-header">
+            <h2><i class="fas fa-file-alt"></i> Email Templates</h2>
+            <p>Customize automated email templates</p>
+          </div>
+          <div class="email-templates">
+            <div class="template-item">
+              <div class="template-info">
+                <h4>Order Confirmation</h4>
+                <p>Sent when customer places an order</p>
+              </div>
+              <div class="template-actions">
+                <button class="btn btn-sm btn-outline" onclick="editEmailTemplate('order-confirmation')">
+                  <i class="fas fa-edit"></i> Edit
+                </button>
+                <button class="btn btn-sm btn-outline" onclick="previewEmailTemplate('order-confirmation')">
+                  <i class="fas fa-eye"></i> Preview
+                </button>
+              </div>
+            </div>
+            <div class="template-item">
+              <div class="template-info">
+                <h4>Shipping Notification</h4>
+                <p>Sent when order is shipped</p>
+              </div>
+              <div class="template-actions">
+                <button class="btn btn-sm btn-outline" onclick="editEmailTemplate('shipping-notification')">
+                  <i class="fas fa-edit"></i> Edit
+                </button>
+                <button class="btn btn-sm btn-outline" onclick="previewEmailTemplate('shipping-notification')">
+                  <i class="fas fa-eye"></i> Preview
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary">Test Email</button>
+          <button type="button" class="btn btn-primary">Save Email Settings</button>
+        </div>
+      </section>
+
+      <!-- Security Settings -->
+      <section class="settings-content" id="security-settings">
+        <div class="settings-section">
+          <div class="section-header">
+            <h2><i class="fas fa-shield-alt"></i> Security Configuration</h2>
+            <p>Configure security settings and access controls</p>
+          </div>
+          <div class="settings-form">
+            <div class="form-group">
+              <label>
+                <input type="checkbox" checked>
+                Enable two-factor authentication
+              </label>
+            </div>
+            <div class="form-group">
+              <label>
+                <input type="checkbox" checked>
+                Force HTTPS for all connections
+              </label>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="session-timeout">Session Timeout (minutes)</label>
+                <input type="number" id="session-timeout" class="form-input" value="30" min="5" max="1440">
+              </div>
+              <div class="form-group">
+                <label for="max-login-attempts">Max Login Attempts</label>
+                <input type="number" id="max-login-attempts" class="form-input" value="5" min="1" max="20">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password-policy">Password Policy</label>
+              <div class="checkbox-group">
+                <label><input type="checkbox" checked> Minimum 8 characters</label>
+                <label><input type="checkbox" checked> Require uppercase letter</label>
+                <label><input type="checkbox" checked> Require lowercase letter</label>
+                <label><input type="checkbox" checked> Require number</label>
+                <label><input type="checkbox"> Require special character</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary">Reset</button>
+          <button type="button" class="btn btn-primary">Save Security Settings</button>
+        </div>
+      </section>
+
+      <!-- Integrations Settings -->
+      <section class="settings-content" id="integrations-settings">
+        <div class="settings-section">
+          <div class="section-header">
+            <h2><i class="fas fa-plug"></i> Third-Party Integrations</h2>
+            <p>Connect with external services and APIs</p>
+          </div>
+          <div class="integrations-grid">
+            <div class="integration-card">
+              <div class="integration-header">
+                <img src="../placeholder.svg?height=40&width=40" alt="Google Analytics" class="integration-logo">
+                <div>
+                  <h4>Google Analytics</h4>
+                  <p>Track website analytics</p>
+                </div>
+                <div class="integration-status connected">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+              </div>
+              <div class="integration-config">
+                <div class="form-group">
+                  <label for="ga-tracking-id">Tracking ID</label>
+                  <input type="text" id="ga-tracking-id" class="form-input" value="GA-XXXXXXXXX-X">
+                </div>
+                <button class="btn btn-sm btn-outline">Configure</button>
+              </div>
+            </div>
+
+            <div class="integration-card">
+              <div class="integration-header">
+                <img src="../placeholder.svg?height=40&width=40" alt="Facebook Pixel" class="integration-logo">
+                <div>
+                  <h4>Facebook Pixel</h4>
+                  <p>Track conversions and ads</p>
+                </div>
+                <div class="integration-status disconnected">
+                  <i class="fas fa-times-circle"></i>
+                </div>
+              </div>
+              <div class="integration-config">
+                <div class="form-group">
+                  <label for="fb-pixel-id">Pixel ID</label>
+                  <input type="text" id="fb-pixel-id" class="form-input" placeholder="Enter Facebook Pixel ID">
+                </div>
+                <button class="btn btn-sm btn-primary">Connect</button>
+              </div>
+            </div>
+
+            <div class="integration-card">
+              <div class="integration-header">
+                <img src="../placeholder.svg?height=40&width=40" alt="Mailchimp" class="integration-logo">
+                <div>
+                  <h4>Mailchimp</h4>
+                  <p>Email marketing automation</p>
+                </div>
+                <div class="integration-status disconnected">
+                  <i class="fas fa-times-circle"></i>
+                </div>
+              </div>
+              <div class="integration-config">
+                <div class="form-group">
+                  <label for="mailchimp-api-key">API Key</label>
+                  <input type="password" id="mailchimp-api-key" class="form-input" placeholder="Enter Mailchimp API Key">
+                </div>
+                <button class="btn btn-sm btn-primary">Connect</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-primary">Save Integration Settings</button>
+        </div>
+      </section>
+
+      <!-- System Settings -->
+      <section class="settings-content" id="system-settings">
+        <div class="settings-section">
+          <div class="section-header">
+            <h2><i class="fas fa-server"></i> System Configuration</h2>
+            <p>System maintenance and backup settings</p>
+          </div>
+          <div class="settings-form">
+            <div class="form-group">
+              <label>
+                <input type="checkbox" checked>
+                Enable automatic backups
+              </label>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="backup-frequency">Backup Frequency</label>
+                <select id="backup-frequency" class="form-input">
+                  <option value="daily" selected>Daily</option>
+                  <option value="weekly">Weekly</option>
+                  <option value="monthly">Monthly</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="backup-retention">Retention Period (days)</label>
+                <input type="number" id="backup-retention" class="form-input" value="30" min="1" max="365">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>
+                <input type="checkbox" checked>
+                Enable error logging
+              </label>
+            </div>
+            <div class="form-group">
+              <label for="log-level">Log Level</label>
+              <select id="log-level" class="form-input">
+                <option value="error">Error</option>
+                <option value="warning" selected>Warning</option>
+                <option value="info">Info</option>
+                <option value="debug">Debug</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <div class="section-header">
+            <h2><i class="fas fa-tools"></i> Maintenance</h2>
+            <p>System maintenance tools</p>
+          </div>
+          <div class="maintenance-tools">
+            <div class="tool-item">
+              <div class="tool-info">
+                <h4>Clear Cache</h4>
+                <p>Clear system cache to improve performance</p>
+              </div>
+              <button class="btn btn-outline">Clear Cache</button>
+            </div>
+            <div class="tool-item">
+              <div class="tool-info">
+                <h4>Database Optimization</h4>
+                <p>Optimize database tables for better performance</p>
+              </div>
+              <button class="btn btn-outline">Optimize Database</button>
+            </div>
+            <div class="tool-item">
+              <div class="tool-info">
+                <h4>System Backup</h4>
+                <p>Create a manual backup of your system</p>
+              </div>
+              <button class="btn btn-primary">Create Backup</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary">Reset</button>
+          <button type="button" class="btn btn-primary">Save System Settings</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="settings.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

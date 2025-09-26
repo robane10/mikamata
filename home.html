@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MIKAMATA — Home</title>
+  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- ====== HEADER ====== -->
+  <header class="header">
+    <div class="container">
+      <div class="brand">
+        <!-- Updated logo source to match React component -->
+        <img src="mik/logo.png" alt="MIKAMATA Logo">
+        
+      </div>
+      <nav class="nav">
+        <a href="home.html" class="active">Home</a>
+        <a href="products.html">Products</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="contactus.html">Contact Us</a>
+      </nav>
+      <div class="header-actions">
+        <div class="search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+ <input type="text" placeholder="Search">
+        </div>
+        <button class="icon-btn" id="cartBtn" title="Shopping Cart">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <button class="icon-btn" id="wishlistBtn" title="Wishlist">
+            <i class="fas fa-heart"></i>
+            <span class="wishlist-count" id="wishlistCount">0</span>
+        </button>
+        <button class="btn login" onclick="location.href='login.html'">Login</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====== HERO ====== -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">"Bamboo Crafts,</p>
+        <h1><span>MIKAMATA</span><br>Your Way."</h1>
+        <p class="lead">
+          Welcome to Mikamata! Here, we celebrate the art of bamboo craftsmanship by offering you a one-stop hub where you can design custom bamboo creations, learn about bamboo, and shop from a vibrant marketplace all while supporting local artisans and discovering how simple it is to bring your bamboo vision to life.
+        </p>
+         <a href="aboutus.html" class="btn cta">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+
+      </div>
+      <div class="hero-visual">
+        <!-- Updated image sources to match React component -->
+        <img class="bamboo" src="mik/m1.png" alt="Bamboo plant">
+        <div class="showcase">
+          <img src="mik/b22.png" alt="Bamboo products">
+          <img src="mik/p4.png" alt="Bamboo products">
+          <img src="mik/c6.png" alt="Bamboo products">        
+        </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Updated hero highlights to match React component structure -->
+    <div class="hero-highlights">
+      <div class="highlight">
+        <img src="mik/a1.png" alt="Teacup">
+        <p>Bamboo Handcrafts Hand Made Items Directly from Locals</p>
+      </div>
+      <div class="highlight center">
+        <p>You can buy the best bamboo crafts online now!</p>
+      </div>
+      <div class="highlight">
+        <img src="mik/a2.png" alt="Mini rack">
+        <p>Crafts that blend tradition with modern design</p>
+      </div>
+    </div>
+    
+    <div class="scroll-cue">
+      <i class="fa-solid fa-arrow-down"></i>
+    </div>
+  </section>
+
+  <!-- ====== FEATURED PRODUCTS ====== -->
+  <section class="featured">
+    <div class="container">
+      <h2>Our Products</h2>
+      <div class="product-filters">
+        <button class="filter-btn active">WHAT'S NEW</button>
+        <button class="filter-btn">BEST SELLERS</button>
+        <button class="filter-btn">CUSTOMER FAVORITES</button>
+      </div>
+      
+      <div class="grid">
+        <!-- Updated featured product to match React component with proper pricing -->
+        <article class="card" data-product-id="1">
+          <div class="card-media">
+            <img src="mik/b6.png" alt="Sulu-Light Lampshade">
+          </div>
+          <div class="card-meta">
+            <p class="title">Sulu-Light Lampshade</p>
+            <p class="price">₱150.00</p>
+          </div>
+        </article>
+
+        <!-- Updated all product cards to match React component exactly -->
+        <article class="card" data-product-id="2">
+          <div class="card-media">
+            <img src="mik/p2.png" alt="Ilaw - Kawayan">
+          </div>
+          <div class="card-meta">
+            <p class="title">Ilaw - Kawayan</p>
+            <p class="price">₱100.00</p>
+          </div>
+        </article>
+
+        <article class="card" data-product-id="3">
+          <div class="card-media">
+            <img src="mik/p1.png" alt="HabitHook Rack">
+          </div>
+          <div class="card-meta">
+            <p class="title">HabitHook Rack</p>
+            <p class="price">₱100.00</p>
+          </div>
+        </article>
+
+        <article class="card" data-product-id="4">
+          <div class="card-media">
+            <img src="mik/p3.png" alt="Tadyaw">
+          </div>
+          <div class="card-meta">
+            <p class="title">Tadyaw</p>
+            <p class="price">₱100.00</p>
+          </div>
+        </article>
+
+        <article class="card" data-product-id="5">
+          <div class="card-media">
+            <img src="mik/p4.png" alt="Pugad Holder">
+          </div>
+          <div class="card-meta">
+            <p class="title">Pugad Holder</p>
+            <p class="price">₱100.00</p>
+          </div>
+        </article>
+
+        <article class="card" data-product-id="6">
+          <div class="card-media">
+            <img src="mik/p5.png" alt="Kape - Kawayan">
+          </div>
+          <div class="card-meta">
+            <p class="title">Kape - Kawayan</p>
+            <p class="price">₱100.00</p>
+          </div>
+        </article>
+
+        <article class="card" data-product-id="7">
+          <div class="card-media">
+            <img src="mik/p6.png" alt="Dayang - Dulo">
+          </div>
+          <div class="card-meta">
+            <p class="title">Dayang - Dulo</p>
+            <p class="price">₱100.00</p>
+          </div>
+        </article>
+
+        <article class="card" data-product-id="8">
+          <div class="card-media">
+            <img src="mik/p9.png" alt="Dayang - Dulo">
+          </div>
+          <div class="card-meta">
+            <p class="title">Dayang - Dulo</p>
+            <p class="price">₱100.00</p>
+          </div>
+        </article>
+      </div>
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="products.html" class="btn cta">View All Products <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PROCESS ====== -->
+  <section class="process">
+    <div class="container steps">
+      <!-- Updated process steps descriptions to match React component exactly -->
+      <div class="step">
+        <i class="fa-solid fa-eye"></i>
+        <h4>Browse</h4>
+        <p>Explore available bamboo products.</p>
+      </div>
+      <div class="step">
+        <i class="fa-solid fa-pen-ruler"></i>
+        <h4>Customize</h4>
+        <p>Choose design, color, or size.</p>
+      </div>
+      <div class="step">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <h4>Order</h4>
+        <p>Place your chosen item.</p>
+      </div>
+      <div class="step">
+        <i class="fa-solid fa-truck-fast"></i>
+        <h4>Track</h4>
+        <p>Get updates on your order.</p>
+      </div>
+      <div class="step">
+        <i class="fa-solid fa-star"></i>
+        <h4>Review</h4>
+        <p>Leave feedback after delivery.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PRODUCT CATEGORIES ====== -->
+  <section class="categories">
+    <div class="container">
+      <h2>Product Categories</h2>
+      <div class="category-row">
+        <div class="category" onclick="redirectToProducts('lampshades')">
+          <div class="circle">
+            <img src="mik/c1.png" alt="Lampshades">
+          </div>
+          <p>Lampshades</p>
+        </div>
+        <div class="category" onclick="redirectToProducts('mugs')">
+          <div class="circle">
+            <img src="mik/c2.png" alt="Mugs">
+          </div>
+          <p>Mugs</p>
+        </div>
+        <div class="category" onclick="redirectToProducts('basket')">
+          <div class="circle">
+            <img src="mik/b1.png" alt="Baskets">
+          </div>
+          <p>Baskets</p>
+        </div>
+        <div class="category" onclick="redirectToProducts('kitchenware')">
+          <div class="circle">
+            <img src="mik/kw1.png" alt="Kitchenware">
+          </div>
+          <p>Kitchenware</p>
+        </div>
+        <div class="category" onclick="redirectToProducts('furnitures')">
+          <div class="circle">
+            <img src="mik/c6.png" alt="Furniture">
+          </div>
+          <p>Furniture</p>
+        </div>
+      </div>
+    </div>
+  </section>  <script>
+    function redirectToProducts(category) {
+      window.location.href = `products.html?category=${category}`;
+    }
+  </script>
+
+
+  <!-- ====== ABOUT / CONTACT / INDEX ====== -->
+  <section class="info">
+    <div class="container info-grid">
+      <div class="about">
+        <h3>About Us</h3>
+        <div class="about-brand">
+
+          <span>MIKAMATA</span>
+        </div>
+        <p>
+          The Mithiin Kapakanan Makamatan Tagumpas Livelihood and Handicrafts MIKAMATA is a community-based group established in 2011. The group focuses on making handmade bamboo products such as lampshades, mugs, earrings, phone holders, and furniture.
+        </p>
+      </div>
+      <div class="contacts">
+        <!-- Updated section title to match React component -->
+        <h3>Contacts Us</h3>
+        <p><i class="fa-solid fa-envelope"></i> mikamatahandicrafts@gmail.com</p>
+        <p><i class="fa-solid fa-phone"></i> +639217239592 / +639622328554</p>
+      </div>
+      <div class="index">
+        <h3>Index</h3>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="contactus.html">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer">
+    <div class="container foot">
+      <div class="copy">© Copyright 2025 | MIKAMATA</div>
+      <!-- Updated footer logo source to match React component -->
+
+    </div>
+  </footer>
+
+  <div class="modal" id="cartModal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+    <div class="modal-content" style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 500px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+      <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px;">
+        <h2 style="margin: 0;">Shopping Cart</h2>
+        <button class="close-btn" id="closeCart" style="background: none; border: none; font-size: 1.5em; cursor: pointer;">&times;</button>
+      </div>
+      <div class="modal-body" id="cartItems" style="max-height: 300px; overflow-y: auto;">
+        <!-- Cart items will be loaded here -->
+      </div>
+      <div class="modal-footer" id="cartFooter" style="border-top: 1px solid #eee; padding-top: 15px; margin-top: 15px; text-align: right;">
+        <!-- Cart total and checkout button -->
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="wishlistModal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+    <div class="modal-content" style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 500px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+      <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px;">
+        <h2 style="margin: 0;">Wishlist</h2>
+        <button class="close-btn" id="closeWishlist" style="background: none; border: none; font-size: 1.5em; cursor: pointer;">&times;</button>
+      </div>
+      <div class="modal-body" id="wishlistItems" style="max-height: 300px; overflow-y: auto;">
+        <!-- Wishlist items will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+
+  <style>
+    .notification {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      z-index: 1001;
+    }
+  </style>
+
+</body>
+<script src="home.js"></script>
+
+</html>

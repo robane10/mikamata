@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customers - MIKAMATA Admin</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="customers.css">
+  <style>
+    body {
+      zoom: 80%;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <img src="../mik/logo.png" alt="MIKAMATA Logo" class="admin-logo">
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+          <li><a href="products.html"><i class="fas fa-cubes"></i> <span>Products</span></a></li>
+          <li><a href="orders.html"><i class="fas fa-shopping-cart"></i> <span>Orders</span></a></li>
+          <li><a href="customers.html" class="active"><i class="fas fa-user-group"></i> <span>Customers</span></a></li>
+          <li><a href="tutorials.html"><i class="fas fa-book-open"></i> <span>Tutorials</span></a></li>
+          <li><a href="reviews.html"><i class="fas fa-star"></i> <span>Reviews</span></a></li>
+          <li><a href="notifications.html"><i class="fas fa-bell"></i> <span>Notifications</span></a></li>
+          <li><a href="activity-logs.html"><i class="fas fa-clipboard-list"></i> <span>Activity Logs</span></a></li>
+        </ul>
+        <div class="sidebar-bottom-nav">
+          <ul>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+            <li><a href="#" id="admin-logout-btn"><i class="fas fa-right-from-bracket"></i> <span>Logout</span></a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main-content">
+      <header class="admin-main-header">
+        <div>
+          <nav class="breadcrumbs as-title">
+            <a href="dashboard.html">Dashboard</a>
+            <span class="separator">&gt;</span>
+            <span>Customers</span>
+          </nav>
+          <p id="current-date"></p>
+        </div>
+      </header>
+
+      <!-- Customer Statistics -->
+      <section class="customer-stats">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon total-users">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-info">
+              <h3 id="total-customers-count">0</h3>
+              <p>Total Customers</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon new-users">
+              <i class="fas fa-user-plus"></i>
+            </div>
+            <div class="stat-info">
+              <h3 id="new-customers-count">0</h3>
+              <p>New This Month</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Customer Management -->
+      <section class="admin-section">
+        <!-- Table View -->
+        <div class="table-responsive" id="table-view">
+          <div class="section-header">
+            <div class="section-controls">
+              <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search by Name or Email" id="customer-search">
+              </div>
+              <div class="pagination-wrapper top-pagination">
+                <div class="pagination-info" id="pagination-info-top"></div>
+                <div class="pagination" id="pagination-controls-top"></div>
+              </div>
+            </div>
+          </div>
+          <table class="customers-table">
+            <thead>
+              <tr>
+                <th><input type="checkbox" id="select-all"></th>
+                <th>Customer ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+                <th>Date Registered</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="customers-table-body">
+              <!-- Customer rows will be dynamically inserted by customers.js -->
+            </tbody>
+          </div>
+        </div>
+
+        <!-- Bulk Actions -->
+        <div class="bulk-actions-bar" id="bulk-actions-bar" style="display: none;">
+          <span class="selected-count">0 customers selected</span>
+          <div class="bulk-buttons">
+            <button class="btn btn-secondary" id="bulk-export">
+              <i class="fas fa-download"></i> Export
+            </button>
+            <button class="btn btn-secondary" id="bulk-email">
+              <i class="fas fa-envelope"></i> Send Email
+            </button>
+            <button class="btn btn-secondary" id="bulk-segment">
+              <i class="fas fa-tags"></i> Add Tag
+            </button>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+      </section>
+    </main>
+  </div>
+
+  <!-- Customer Profile Modal -->
+  <div id="customer-modal" class="modal">
+    <div class="modal-content large">
+      <div class="modal-header">
+        <h3 id="modal-title">Customer Profile</h3>
+        <button class="modal-close" title="Close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="customer-profile-tabs">
+          <button class="tab-btn active" data-tab="details">Details</button>
+          <button class="tab-btn" data-tab="addresses">Addresses</button>
+          <button class="tab-btn" data-tab="orders">Order History</button>
+        </div>
+
+        <!-- Customer Details Tab -->
+        <div class="tab-content active" id="details-tab">
+          <form id="customer-form" class="customer-form">
+            <input type="hidden" id="customer-id-input" name="customer_id">
+            
+            <div class="form-section">
+              <div class="modal-form-actions">
+                <button type="button" class="btn btn-secondary" id="cancel-customer-btn">Cancel</button>
+                <button type="submit" class="btn btn-primary" id="save-customer-btn">Save Customer</button>
+              </div>
+
+              <h4>Personal Information</h4>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="first-name" class="form-label">First Name *</label>
+                  <p class="form-static-text" id="first-name"></p>
+                </div>
+                <div class="form-group">
+                  <label for="middle-initial" class="form-label">M.I.</label>
+                  <p class="form-static-text" id="middle-initial"></p>
+                </div>
+                <div class="form-group">
+                  <label for="last-name" class="form-label">Last Name *</label>
+                  <p class="form-static-text" id="last-name"></p>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="email" class="form-label">Email *</label>
+                  <p class="form-static-text" id="email"></p>
+                </div>
+                <div class="form-group">
+                  <label for="phone" class="form-label">Phone</label>
+                  <p class="form-static-text" id="phone"></p>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Date Registered</label>
+                  <p class="form-static-text" id="registration-date"></p>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Last Login</label>
+                  <p class="form-static-text" id="last-login-date"></p>
+                </div>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- Addresses Tab -->
+        <div class="tab-content" id="addresses-tab">
+          <div class="customer-addresses">
+            <div class="address-list">
+              <div class="address-item">
+                <div class="address-header">
+                  <span class="address-type">Home</span>
+                  <span class="address-default">Default</span>
+                </div>
+                <div class="address-details-grid">
+                  <div class="form-group full-width">
+                    <label class="form-label">Street Address</label>
+                    <input type="text" class="form-input" value="123 Main Street, Barangay Centro" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">City</label>
+                    <input type="text" class="form-input" value="Quezon City" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Province</label>
+                    <input type="text" class="form-input" value="Metro Manila" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Postal Code</label>
+                    <input type="text" class="form-input" value="1100" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Country</label>
+                    <input type="text" class="form-input" value="Philippines" readonly>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Orders Tab -->
+        <div class="tab-content" id="orders-tab">
+            <div class="customer-orders-list">
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="customer-orders-tbody">
+                        <!-- Order rows will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="customers.js"></script>
+</body>
+</html>

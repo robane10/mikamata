@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products - MIKAMATA Admin</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="products.css">
+  <style>
+    body {
+      zoom: 80%;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <img src="../mik/logo.png" alt="MIKAMATA Logo" class="admin-logo">
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+          <li><a href="products.html" class="active"><i class="fas fa-cubes"></i> <span>Products</span></a></li>
+          <li><a href="orders.html"><i class="fas fa-shopping-cart"></i> <span>Orders</span></a></li>
+          <li><a href="customers.html"><i class="fas fa-user-group"></i> <span>Users</span></a></li>
+          <li><a href="tutorials.html"><i class="fas fa-book-open"></i> <span>Tutorials</span></a></li>
+          <li><a href="reviews.html"><i class="fas fa-star"></i> <span>Reviews</span></a></li>
+          <li><a href="notifications.html"><i class="fas fa-bell"></i> <span>Notifications</span></a></li>
+          <li><a href="activity-logs.html"><i class="fas fa-clipboard-list"></i> <span>Activity Logs</span></a></li>
+        </ul>
+        <div class="sidebar-bottom-nav">
+          <ul>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+            <li><a href="#" id="admin-logout-btn"><i class="fas fa-right-from-bracket"></i> <span>Logout</span></a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main-content">
+      <header class="admin-main-header">
+        <div>
+          <nav class="breadcrumbs as-title">
+            <a href="dashboard.html">Dashboard</a>
+            <span class="separator">&gt;</span>
+            <span>Products</span>
+          </nav>
+          <p id="current-date"></p>
+        </div>
+      </header>
+
+      <!-- Products Stats -->
+      <div class="products-stats-grid" style="margin-bottom: 1.875rem;">
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background: linear-gradient(135deg, #4CAF50, #45a049);">
+            <i class="fas fa-cubes"></i>
+          </div>
+          <div class="stat-card-info">
+            <h3>Total Products</h3>
+            <p id="total-products">156</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background: linear-gradient(135deg, #FF9800, #F57C00);">
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+          <div class="stat-card-info">
+            <h3>Low Stock</h3>
+            <p id="low-stock-count">8</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background: linear-gradient(135deg, #2196F3, #1976D2);">
+            <i class="fas fa-tags"></i>
+          </div>
+          <div class="stat-card-info">
+            <h3>Categories</h3>
+            <p id="total-categories">12</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background: linear-gradient(135deg, #9C27B0, #7B1FA2);">
+            <i class="fas fa-peso-sign"></i>
+          </div>
+          <div class="stat-card-info">
+            <h3>Avg. Price</h3>
+            <p id="avg-price">₱2,450</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products Management -->
+      <section class="admin-section">
+        <div class="section-header">
+          <div class="section-controls">
+            <div class="search-box">
+              <input type="text" id="product-search" placeholder="Search products...">
+              <i class="fas fa-search"></i>
+            </div>
+            <select id="category-filter" class="form-select">
+              <option value="">All Categories</option>
+              <option value="lampshades">Lampshades</option>
+              <option value="mugs">Mugs</option>
+              <option value="baskets">Baskets</option>
+              <option value="kitchenware">Kitchenware</option>
+              <option value="furniture">Furniture</option>
+            </select>
+            <div class="filter-group price-filter">
+              <input type="number" id="min-price" placeholder="Min Price" class="form-input">
+              <span>-</span>
+              <input type="number" id="max-price" placeholder="Max Price" class="form-input">
+            </div>
+            <button class="btn btn-primary" id="add-product-btn">
+              <i class="fas fa-plus"></i> Add Product
+            </button>
+          </div>
+        </div>
+
+        <!-- Table View -->
+        <div class="table-responsive" id="table-view">
+          <table class="products-table">
+            <thead>
+              <tr>
+                <th><input type="checkbox" id="select-all"></th>
+                <th data-sort="id" class="sortable">Product ID <i class="fas fa-sort"></i></th>
+                <th data-sort="name" class="sortable">Product <i class="fas fa-sort"></i></th>
+                <th>Category</th>
+                <th data-sort="price" class="sortable">Price <i class="fas fa-sort"></i></th>
+                <th data-sort="stock" class="sortable">Stock <i class="fas fa-sort"></i></th>
+                <th data-sort="dateAdded" class="sortable">Date Added <i class="fas fa-sort"></i></th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="products-table-body">
+              <!-- Product rows will be dynamically inserted here by products.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Bulk Actions -->
+        <div class="bulk-actions" id="bulk-actions" style="display: none;">
+          <span class="selected-count">0 items selected</span>
+          <div class="bulk-buttons">
+            <button class="btn btn-danger" id="bulk-delete">
+              <i class="fas fa-trash"></i> Delete
+            </button>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-wrapper">
+          <div class="pagination-info">
+            Showing 1-10 of 156 products
+          </div>
+          <div class="pagination">
+            <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <span class="pagination-dots">...</span>
+            <button class="pagination-btn">16</button>
+            <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Product Modal -->
+  <div id="product-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title">Add New Product</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="product-form" class="product-form">
+          <input type="hidden" id="product-id" name="product_id">
+
+          <div class="form-grid">
+            <!-- Left Column -->
+            <div class="form-column">
+              <div class="form-group">
+                <label for="product-name" class="form-label">Product Name *</label>
+                <input type="text" id="product-name" name="name" class="form-input" required placeholder="e.g., Woven Bamboo Lampshade">
+              </div>
+              <div class="form-group">
+                <label for="product-description" class="form-label">Description</label>
+                <textarea id="product-description" name="description" class="form-textarea" rows="7" placeholder="Add a detailed description for your product..."></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="base-price" class="form-label">Price (₱) *</label>
+                <input type="number" id="base-price" name="base_price" class="form-input" step="0.01" min="0" required placeholder="1250.00">
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="stock-quantity" class="form-label">Stock Quantity *</label>
+                  <input type="number" id="stock-quantity" name="stock_quantity" class="form-input" min="0" required placeholder="25">
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="form-column">
+              <div class="form-group">
+                <label class="form-label">Product Images</label>
+                <div class="image-upload-grid">
+                  <!-- Main Image -->
+                  <div class="image-upload-box" data-image-type="image">
+                    <label>Main Image</label>
+                    <div class="image-upload-area-single">
+                      <input type="file" id="image-main-input" accept="image/*" style="display: none;">
+                      <div class="upload-placeholder-single" onclick="this.previousElementSibling.click();">
+                        <i class="fas fa-camera"></i><span>Upload</span>
+                      </div>
+                      <div class="image-preview-container-single"></div>
+                    </div>
+                  </div>
+                  <!-- Default Image -->
+                  <div class="image-upload-box" data-image-type="image_default">
+                    <label>Default Image</label>
+                    <div class="image-upload-area-single">
+                      <input type="file" id="image-default-input" accept="image/*" style="display: none;">
+                      <div class="upload-placeholder-single" onclick="this.previousElementSibling.click();">
+                        <i class="fas fa-image"></i><span>Upload</span>
+                      </div>
+                      <div class="image-preview-container-single"></div>
+                    </div>
+                  </div>
+                  <!-- Finish Images -->
+                  <div class="image-upload-box" data-image-type="image_natural">
+                    <label>Natural Finish</label>
+                    <div class="image-upload-area-single"><input type="file" accept="image/*" style="display: none;"><div class="upload-placeholder-single" onclick="this.previousElementSibling.click();"><i class="fas fa-leaf"></i><span>Upload</span></div><div class="image-preview-container-single"></div></div>
+                  </div>
+                  <div class="image-upload-box" data-image-type="image_dark">
+                    <label>Dark Finish</label>
+                    <div class="image-upload-area-single"><input type="file" accept="image/*" style="display: none;"><div class="upload-placeholder-single" onclick="this.previousElementSibling.click();"><i class="fas fa-coffee"></i><span>Upload</span></div><div class="image-preview-container-single"></div></div>
+                  </div>
+                  <div class="image-upload-box" data-image-type="image_premium">
+                    <label>Premium Finish</label>
+                    <div class="image-upload-area-single"><input type="file" accept="image/*" style="display: none;"><div class="upload-placeholder-single" onclick="this.previousElementSibling.click();"><i class="fas fa-gem"></i><span>Upload</span></div><div class="image-preview-container-single"></div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="category-id" class="form-label">Category *</label>
+                <select id="category-id" name="category_id" class="form-select" required>
+                  <option value="">Select Category</option>
+                  <option value="lampshades">Lampshades</option>
+                  <option value="mugs">Mugs</option>
+                  <option value="baskets">Baskets</option>
+                  <option value="kitchenware">Kitchenware</option>
+                  <option value="furniture">Furniture</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="cancel-btn">Cancel</button>
+        <!-- The submit button is now outside the form, so we'll trigger form submission with JS -->
+        <button type="submit" form="product-form" class="btn btn-primary">Save Product</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../data/product-data.js"></script>
+  <script src="products.js"></script> 
+  <script src="admin.js"></script>
+</body>
+</html>

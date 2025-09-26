@@ -1,0 +1,995 @@
+/* Orders Management Specific Styles */
+
+/* Orders Statistics */
+.orders-stats {
+  margin-bottom: 2rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.stat-card {
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.stat-icon.pending { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.stat-icon.processing { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+.stat-icon.shipped { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+.stat-icon.delivered { background: linear-gradient(135deg, #10b981, #059669); }
+
+.stat-info h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.stat-info p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.section-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+  min-width: 300px;
+}
+
+.search-box i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--input-background);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.date-range-filter {
+  position: relative;
+}
+
+.date-range-filter i {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+}
+
+.date-range-filter input {
+  padding-left: 2.25rem;
+  width: 220px; /* Set a fixed width for the date picker */
+}
+
+.filter-group {
+  display: contents; /* This makes the group act as if its children are direct children of the parent flex container */
+}
+
+
+.filter-select {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--input-background);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  min-width: 120px;
+}
+
+.filter-select:focus,
+.search-box input:focus {
+  outline: none;
+  border-color: var(--highlight-primary);
+}
+
+.filter-group {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Table Enhancements */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card-background);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.orders-table th {
+  background: #0b341c; /* Dark green background */
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: white; /* White text for contrast */
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.orders-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+}
+
+.orders-table tr:hover {
+  background: var(--list-item-hover-bg);
+}
+
+/* Customer Info in Table */
+.customer-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.customer-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.customer-name {
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.customer-email {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+/* Order Date */
+.order-date {
+  font-size: 0.9rem;
+}
+
+.order-date .order-time {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.order-time {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+/* Status Badges */
+.order-status,
+.payment-method {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  border: 1px solid transparent;
+}
+
+.order-status.pending { background: transparent; color: #b45309; border-color: #ffffff; }
+.order-status.processing { background: #eff6ff; color: #1d4ed8; }
+.order-status.completed { background: #f0fdf4; color: #15803d; }
+.order-status.cancelled { background: #f1f5f9; color: #64748b; }
+
+/* Payment Method Badges */
+.payment-method.cod { background: #f1f5f9; color: #475569; border-color: #e2e8f0; }
+.payment-method.gcash { background: #e0f2fe; color: #0284c7; border-color: #bae6fd; }
+.payment-method.paymaya { background: #f5f3ff; color: #6d28d9; border-color: #ddd6fe; }
+
+/* Order Total */
+.order-total {
+  font-weight: 600;
+  display: block;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-icon {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.edit-btn {
+  background: rgba(33, 150, 243, 0.1);
+  color: #2196F3;
+}
+
+.edit-btn:hover {
+  background: rgba(33, 150, 243, 0.2);
+  transform: translateY(-1px);
+}
+
+.view-btn {
+  background: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
+}
+
+.view-btn:hover {
+  background: rgba(76, 175, 80, 0.2);
+  transform: translateY(-1px);
+}
+
+.view-btn {
+  background: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
+}
+
+.view-btn:hover {
+  background: rgba(76, 175, 80, 0.2);
+  transform: translateY(-1px);
+}
+
+.delete-btn {
+  background: rgba(255, 71, 87, 0.1);
+  color: #ff4757;
+}
+
+.delete-btn:hover {
+  background: rgba(255, 71, 87, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Bulk Actions Bar */
+.bulk-actions-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.bulk-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+.detail-item .label {
+  color: var(--text-secondary);
+}
+
+.detail-item .value {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Enhanced Modal Styles */
+.modal-content.large {
+  max-width: 1100px;
+  width: 90vw;
+  /* Add flex properties to pin footer */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Prevent body from scrolling */
+}
+
+.order-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.details-section {
+  background: var(--section-background);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.details-section.full-width {
+  grid-column: 1 / -1;
+}
+
+.order-detail-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* Make modal body scrollable */
+.modal-body {
+  overflow-y: auto;
+}
+
+.order-detail-main, .order-detail-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+
+.details-section h4 {
+  margin: 0 0 1rem 0;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.details-section h4 i {
+  color: var(--primary-color);
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.detail-row strong {
+  color: var(--text-secondary);
+  min-width: 120px;
+}
+
+.detail-row span {
+  color: var(--text-primary);
+  text-align: right;
+  word-break: break-word;
+}
+
+.totals-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.totals-summary .detail-row.total {
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+
+/* Order Items List */
+.order-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.item-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.item-details {
+  flex: 1;
+}
+
+.item-name {
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.item-sku {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
+}
+
+.item-price {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.item-total {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+}
+
+/* Order Timeline */
+.order-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.order-timeline.horizontal {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1rem 0;
+}
+
+.order-timeline.horizontal .timeline-item {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  flex: 1;
+}
+
+.order-timeline.horizontal .timeline-item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  top: 30px; /* Center with 60px icon */
+  left: 50%;
+  background: #e2e8f0; /* Use a visible light gray color */
+  z-index: 0;
+}
+
+.order-timeline.horizontal .timeline-content {
+  margin-top: 0.5rem;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.timeline-item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 40px;
+  width: 2px;  height: calc(100% - 20px);
+  background: var(--border-color);
+}
+
+.timeline-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--border-color);
+  color: var(--text-secondary);
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+/* Color coding for timeline icons based on status */
+.timeline-item.completed .timeline-icon.status-pending { color: #b45309; }
+.timeline-item.completed .timeline-icon.status-processing { color: #1d4ed8; }
+.timeline-item.completed .timeline-icon.status-shipped { color: #7c3aed; }
+
+/* Override for completed steps to have a solid, more prominent color */
+.timeline-item.completed .timeline-icon.status-processing { color: #3b82f6; }
+.timeline-item.completed .timeline-icon.status-shipped { color: #8b5cf6; }
+.timeline-item.completed .timeline-icon.status-completed {
+  color: var(--success-color);
+}
+
+/* Highlight the currently active step */
+.timeline-item.active .timeline-icon {
+  color: var(--primary-color);
+}
+
+.timeline-item.completed:not(:last-child)::before {
+  background: var(--success-color);
+}
+
+.timeline-item.completed:not(:last-child)::before {
+  background: var(--success-color);
+}
+
+.timeline-item .fa-box-check {
+  font-size: 1.2rem;
+}
+
+.timeline-content {
+  flex: 1;
+}
+
+.timeline-title {
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.timeline-date {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+
+/* Update Form */
+.update-form {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--section-background);
+  padding: 1rem;
+  border-radius: 8px;
+}
+.update-form label {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.update-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.update-form .form-input {
+  flex: 1;
+}
+
+/* --- Professional Redesign for Edit Order Modal --- */
+
+/* Main modal frame: Use the theme's gradient for the header */
+#order-edit-modal .modal-content.large {
+  max-width: 1000px; /* A good size for desktop/tablet */
+  background-color: #ffffff;
+  color: #343a40; /* Default text color */
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e2e8f0;
+}
+
+/* Minimalist header with a clean separator */
+#order-edit-modal .modal-header {
+  background: linear-gradient(135deg, #a0522d 0%, #6f4e37 100%);
+  color: white;
+  border-bottom: none;
+}
+
+#order-edit-modal .modal-header h3,
+#order-edit-modal .modal-header .close {
+  color: white;
+}
+
+/* Standardize text colors within the modal */
+#order-edit-modal .details-section h4,
+#order-edit-modal .timeline-title,
+#order-edit-modal .update-form label {
+  color: #343a40;
+}
+
+/* Remove the outer box for the timeline section for a cleaner, integrated look */
+#order-edit-modal .details-section {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* Horizontal Stepper Timeline */
+#order-edit-modal .order-timeline {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  padding: 1.5rem 0;
+}
+
+/* The connecting line for the stepper */
+#order-edit-modal .order-timeline::before {
+  content: '';
+  position: absolute;
+  width: calc(100% - 80px); /* Adjust width to not go beyond start/end icons */
+  height: 4px;
+  top: 10px; /* Vertically center with the 24px icon */
+  left: 40px;
+  background-color: #e2e8f0;
+  z-index: 0;
+}
+
+/* Individual step in the timeline */
+#order-edit-modal .timeline-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  flex: 1; /* Distribute space evenly */
+  z-index: 1;
+}
+
+/* Icon styling for each step */
+#order-edit-modal .timeline-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #e2e8f0;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  border: 2px solid #e2e8f0;
+  margin-bottom: 0.5rem;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Style for completed steps */
+#order-edit-modal .timeline-item.completed .timeline-icon {
+  background-color: var(--success-color); /* Use theme success color */
+  color: white;
+  border-color: var(--success-color);
+}
+
+/* Style for the currently active step */
+#order-edit-modal .timeline-item.active .timeline-icon {
+  background-color: var(--info-color); /* Use theme info color (blue) */
+  color: white;
+  border-color: var(--info-color);
+  box-shadow: 0 0 0 4px rgba(33, 150, 243, 0.3); /* Subtle glow */
+}
+
+/* Change the connecting line color for completed segments */
+#order-edit-modal .timeline-item.completed:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  top: 10px; /* Vertically center with the 24px icon */
+  left: 50%;
+  background: var(--success-color);
+  z-index: 0;
+}
+
+/* Minimalist and prominent footer for status updates */
+.modal-footer {
+  background: #f8f9fa;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between; /* Push items to opposite ends */
+  align-items: center;
+  padding: 1rem 1.5rem;
+}
+
+.update-status-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* Space between label and select */
+  flex-grow: 1; /* Allow this group to take up space */
+  margin-right: 1rem; /* Add some space before the button */
+}
+
+.modal-footer label {
+  color: #495057;
+}
+
+/* Override for the Update Status button to be green */
+#order-edit-modal .modal-footer .btn-primary {
+  background: var(--success-color);
+  color: white;
+}
+
+#order-edit-modal .modal-footer .btn-primary:hover {
+  background: #14532d; /* Darker green on hover */
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .search-box {
+    min-width: auto;
+  }
+  
+  .filter-group {
+    justify-content: stretch;
+  }
+  
+  .filter-select {
+    flex: 1;
+  }
+  
+  .orders-table {
+    font-size: 0.8rem;
+  }
+  
+  .orders-table th,
+  .orders-table td {
+    padding: 0.5rem;
+  }
+  
+  .customer-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .order-details-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .order-detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .bulk-actions-bar {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
+
+/* Style override for the status dropdown in the edit modal */
+#order-edit-modal .modal-footer .form-input {
+  background-color: white;
+  color: #343a40;
+  border: 1px solid #ced4da;
+  flex-grow: 1; /* Allow the select to grow and fill space */
+}
+
+/* Style for the options within the dropdown */
+#order-edit-modal #edit-modal-order-status option {
+  background-color: white;
+  color: #343a40;
+}
+
+/* Pagination Styles */
+.pagination-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.pagination-info {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.pagination {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.page-btn {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color);
+  background: var(--card-background);
+  color: var(--text-primary);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.page-btn:hover:not(:disabled) {
+  background: var(--list-item-hover-bg);
+}
+
+.page-btn.active {
+  background: var(--highlight-primary);
+  color: white;
+  border-color: var(--highlight-primary);
+}
+
+/* --- Receipt Style for Order Detail Modal --- */
+
+/* Make the modal narrow like a receipt */
+#order-detail-modal .modal-content.large {
+  max-width: 700px; /* Narrower width for receipt style */
+  width: 98vw;
+  background-color: #ffffff;
+  color: #1a202c;
+}
+
+/* Use a single column layout */
+#order-detail-modal .order-detail-layout {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+/* Set title color to black */
+#order-detail-modal .modal-header h3,
+#order-detail-modal .modal-header .close {
+  color: #1a202c;
+}
+
+
+/* Remove default section styling and use dashed separators */
+#order-detail-modal .details-section {
+  background: none;
+  border: none;
+  padding: 0.75rem 0;
+  border-bottom: 2px dashed #cccccc;
+}
+
+#order-detail-modal .details-section:last-child {
+  border-bottom: none;
+}
+
+#order-detail-modal .details-section h4 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #374151;
+}
+
+/* Remove images from the item list for a cleaner receipt look */
+#order-detail-modal .order-item .item-image {
+  display: none;
+}
+
+/* Style each line item */
+#order-detail-modal .order-item {
+  background: none;
+  border: none;
+  padding: 0.25rem 0;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+#order-detail-modal .order-item .item-details {
+  flex: 1;
+}
+
+#order-detail-modal .order-item .item-name {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #111827;
+  margin-bottom: 0;
+}
+
+#order-detail-modal .order-item .item-price {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.85rem;
+  color: #4b5563;
+}
+
+#order-detail-modal .order-item .item-total {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #111827;
+}
+
+/* Style the customer and totals sections */
+#order-detail-modal .detail-row {
+  display: flex;
+  margin-bottom: 0.25rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+}
+
+#order-detail-modal .detail-row strong {
+  color: #4b5563;
+  min-width: 120px;
+  flex-shrink: 0;
+  margin-right: 1rem;
+}
+
+#order-detail-modal .detail-row span {
+  text-align: right;
+  flex-grow: 1;
+}
+
+#order-detail-modal .totals-summary {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 2px dashed #cccccc;
+}
+
+#order-detail-modal .totals-summary .detail-row.total {
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-top: none;
+  margin-top: 0.5rem;
+}

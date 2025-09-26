@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notifications - MIKAMATA Admin</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <link rel="stylesheet" href="admin.css"/>
+  <link rel="stylesheet" href="notifications.css"/>
+  <style>
+    body {
+      zoom: 80%;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <img src="../mik/logo.png" alt="MIKAMATA Logo" class="admin-logo">
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+          <li><a href="products.html"><i class="fas fa-cubes"></i> <span>Products</span></a></li>
+          <li><a href="orders.html"><i class="fas fa-shopping-cart"></i> <span>Orders</span></a></li>
+          <li><a href="customers.html"><i class="fas fa-user-group"></i> <span>Users</span></a></li>
+          <li><a href="tutorials.html"><i class="fas fa-book-open"></i> <span>Tutorials</span></a></li>
+          <li><a href="reviews.html"><i class="fas fa-star"></i> <span>Reviews</span></a></li>
+          <li><a href="notifications.html" class="active"><i class="fas fa-bell"></i> <span>Notifications</span></a></li>
+          <li><a href="activity-logs.html"><i class="fas fa-clipboard-list"></i> <span>Activity Logs</span></a></li>
+        </ul>
+        <div class="sidebar-bottom-nav">
+          <ul>
+          <li><a href="settings.html"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+          <li><a href="#" id="admin-logout-btn"><i class="fas fa-right-from-bracket"></i> <span>Logout</span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main-content">
+      <header class="admin-main-header">
+        <div class="header-left">
+          <h1>Notifications Management</h1>
+          <p id="current-date"></p>
+        </div>
+      </header>
+
+      <!-- Notification Statistics -->
+      <section class="notifications-stats">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon sent">
+              <i class="fas fa-paper-plane"></i>
+            </div>
+            <div class="stat-info">
+              <h3>1,247</h3>
+              <p>Sent Today</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon delivered">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="stat-info">
+              <h3>1,198</h3>
+              <p>Delivered</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon opened">
+              <i class="fas fa-envelope-open"></i>
+            </div>
+            <div class="stat-info">
+              <h3>892</h3>
+              <p>Opened</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon failed">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="stat-info">
+              <h3>12</h3>
+              <p>Failed</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Notification History -->
+      <section class="admin-section">
+        <div class="section-header">
+          <h2>Notification History</h2>
+          <div class="header-actions">
+            <div class="search-box">
+              <i class="fas fa-search"></i>
+              <input type="text" placeholder="Search notifications..." id="notification-search">
+            </div>
+            <select id="status-filter" class="filter-select">
+              <option value="">All Status</option>
+              <option value="sent">Sent</option>
+              <option value="delivered">Delivered</option>
+              <option value="opened">Opened</option>
+              <option value="failed">Failed</option>
+            </select>
+            <select id="type-filter" class="filter-select">
+              <option value="">All Types</option>
+              <option value="order">Orders</option>
+              <option value="user">Users</option>
+              <option value="product">Products</option>
+              <option value="review">Reviews</option>
+              <option value="system">System</option>
+            </select>
+            <button class="btn btn-outline" id="export-notifications">
+              <i class="fas fa-download"></i> Export
+            </button>
+          </div>
+        </div>
+
+        <div class="notifications-list" id="notifications-list-container">
+          <!-- Notifications will be dynamically inserted here by notifications.js -->
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-wrapper">
+          <div class="pagination-info">
+            Showing 1-10 of 156 notifications
+          </div>
+          <div class="pagination">
+            <button class="page-btn" disabled><i class="fas fa-chevron-left"></i></button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">...</button>
+            <button class="page-btn">16</button>
+            <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- All modals are placeholders for now -->
+
+  <!-- Send Notification Modal -->
+  <div id="send-notification-modal" class="modal">
+    <div class="modal-content large">
+      <div class="modal-header">
+        <h3>Send Custom Notification</h3>
+        <span class="close" onclick="closeSendNotificationModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="send-notification-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="notification-type">Notification Type</label>
+              <select id="notification-type" class="form-input" required>
+                <option value="">Select Type</option>
+                <option value="order">Order Update</option>
+                <option value="promotional">Promotional</option>
+                <option value="system">System</option>
+                <option value="custom">Custom</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="notification-priority">Priority</label>
+              <select id="notification-priority" class="form-input">
+                <option value="normal">Normal</option>
+                <option value="high">High</option>
+                <option value="urgent">Urgent</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="notification-recipients">Recipients</label>
+            <div class="recipient-options">
+              <label class="radio-option">
+                <input type="radio" name="recipient-type" value="single" checked>
+                <span>Single User</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="recipient-type" value="multiple">
+                <span>Multiple Users</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="recipient-type" value="all">
+                <span>All Users</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="recipient-type" value="segment">
+                <span>User Segment</span>
+              </label>
+            </div>
+            <input type="text" id="recipient-input" class="form-input" placeholder="Enter email address or user ID">
+          </div>
+
+          <div class="form-group">
+            <label for="notification-title">Title</label>
+            <input type="text" id="notification-title" class="form-input" placeholder="Notification title" required>
+          </div>
+
+          <div class="form-group">
+            <label for="notification-message">Message</label>
+            <textarea id="notification-message" class="form-input" rows="4" placeholder="Enter your message here..." required></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="notification-channel">Channel</label>
+              <div class="channel-options">
+                <label class="checkbox-option">
+                  <input type="checkbox" name="channels" value="email" checked>
+                  <span>Email</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" name="channels" value="sms">
+                  <span>SMS</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" name="channels" value="push">
+                  <span>Push</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" name="channels" value="in-app">
+                  <span>In-App</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="send-time">Send Time</label>
+              <select id="send-time" class="form-input">
+                <option value="now">Send Now</option>
+                <option value="schedule">Schedule</option>
+              </select>
+              <input type="datetime-local" id="schedule-time" class="form-input" style="display: none;">
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" onclick="closeSendNotificationModal()">Cancel</button>
+            <button type="button" class="btn btn-outline" id="preview-notification">Preview</button>
+            <button type="submit" class="btn btn-primary">Send Notification</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Notification Modal -->
+  <div id="order-notification-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Send Order Status Notification</h3>
+        <span class="close" onclick="closeOrderNotificationModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="order-notification-form">
+          <div class="form-group">
+            <label for="order-id">Order ID</label>
+            <input type="text" id="order-id" class="form-input" placeholder="Enter order ID (e.g., ORD-001)" required>
+            <button type="button" class="btn btn-outline btn-sm" id="search-order">Search</button>
+          </div>
+
+          <div id="order-details" class="order-preview" style="display: none;">
+            <h4>Order Details</h4>
+            <div class="order-info">
+              <div class="info-item">
+                <span class="label">Customer:</span>
+                <span class="value" id="order-customer"></span>
+              </div>
+              <div class="info-item">
+                <span class="label">Email:</span>
+                <span class="value" id="order-email"></span>
+              </div>
+              <div class="info-item">
+                <span class="label">Current Status:</span>
+                <span class="value" id="order-status"></span>
+              </div>
+              <div class="info-item">
+                <span class="label">Total:</span>
+                <span class="value" id="order-total"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="status-update">Status Update</label>
+            <select id="status-update" class="form-input" required>
+              <option value="">Select new status</option>
+              <option value="confirmed">Order Confirmed</option>
+              <option value="processing">Processing</option>
+              <option value="shipped">Shipped</option>
+              <option value="out-for-delivery">Out for Delivery</option>
+              <option value="delivered">Delivered</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="tracking-number">Tracking Number (Optional)</label>
+            <input type="text" id="tracking-number" class="form-input" placeholder="Enter tracking number">
+          </div>
+
+          <div class="form-group">
+            <label for="additional-message">Additional Message (Optional)</label>
+            <textarea id="additional-message" class="form-input" rows="3" placeholder="Add any additional information for the customer..."></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" onclick="closeOrderNotificationModal()">Cancel</button>
+            <button type="submit" class="btn btn-primary">Send Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Templates Modal -->
+  <div id="template-modal" class="modal">
+    <div class="modal-content large">
+      <div class="modal-header">
+        <h3>Notification Templates</h3>
+        <span class="close" onclick="closeTemplateModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="template-actions">
+          <button class="btn btn-primary" onclick="createNewTemplate()">
+            <i class="fas fa-plus"></i> Create Template
+          </button>
+        </div>
+
+        <div class="templates-grid">
+          <div class="template-card">
+            <div class="template-header">
+              <h4>Order Confirmation</h4>
+              <span class="template-type order">Order</span>
+            </div>
+            <div class="template-preview">
+              <p>Thank you for your order! Your order #{ORDER_ID} has been confirmed...</p>
+            </div>
+            <div class="template-actions">
+              <button class="btn btn-sm btn-outline" onclick="editTemplate('temp-001')">Edit</button>
+              <button class="btn btn-sm btn-outline" onclick="useTemplate('temp-001')">Use</button>
+              <button class="btn btn-sm btn-outline" onclick="duplicateTemplate('temp-001')">Duplicate</button>
+            </div>
+          </div>
+
+          <div class="template-card">
+            <div class="template-header">
+              <h4>Shipping Notification</h4>
+              <span class="template-type order">Order</span>
+            </div>
+            <div class="template-preview">
+              <p>Great news! Your order #{ORDER_ID} has been shipped. Track your package...</p>
+            </div>
+            <div class="template-actions">
+              <button class="btn btn-sm btn-outline" onclick="editTemplate('temp-002')">Edit</button>
+              <button class="btn btn-sm btn-outline" onclick="useTemplate('temp-002')">Use</button>
+              <button class="btn btn-sm btn-outline" onclick="duplicateTemplate('temp-002')">Duplicate</button>
+            </div>
+          </div>
+
+          <div class="template-card">
+            <div class="template-header">
+              <h4>Welcome Message</h4>
+              <span class="template-type system">System</span>
+            </div>
+            <div class="template-preview">
+              <p>Welcome to MIKAMATA! We're excited to have you join our community...</p>
+            </div>
+            <div class="template-actions">
+              <button class="btn btn-sm btn-outline" onclick="editTemplate('temp-003')">Edit</button>
+              <button class="btn btn-sm btn-outline" onclick="useTemplate('temp-003')">Use</button>
+              <button class="btn btn-sm btn-outline" onclick="duplicateTemplate('temp-003')">Duplicate</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="notifications.js"></script>
+  <script src="admin.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reviews - MIKAMATA Admin</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <link rel="stylesheet" href="admin.css"/>
+  <link rel="stylesheet" href="reviews.css"/>
+  <style>
+    body {
+      zoom: 80%;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <img src="../mik/logo.png" alt="MIKAMATA Logo" class="admin-logo">
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+          <li><a href="products.html"><i class="fas fa-cubes"></i> <span>Products</span></a></li>
+          <li><a href="orders.html"><i class="fas fa-shopping-cart"></i> <span>Orders</span></a></li>
+          <li><a href="customers.html"><i class="fas fa-user-group"></i> <span>Users</span></a></li>
+          <li><a href="tutorials.html"><i class="fas fa-book-open"></i> <span>Tutorials</span></a></li>
+          <li><a href="reviews.html" class="active"><i class="fas fa-star"></i> <span>Reviews</span></a></li>
+          <li><a href="notifications.html"><i class="fas fa-bell"></i> <span>Notifications</span></a></li>
+          <li><a href="activity-logs.html"><i class="fas fa-clipboard-list"></i> <span>Activity Logs</span></a></li>
+        </ul>
+        <div class="sidebar-bottom-nav">
+          <ul>
+          <li><a href="settings.html"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+          <li><a href="#" id="admin-logout-btn"><i class="fas fa-right-from-bracket"></i> <span>Logout</span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main-content">
+      <header class="admin-main-header">
+        <div>
+          <nav class="breadcrumbs as-title">
+            <a href="dashboard.html">Dashboard</a>
+            <span class="separator">&gt;</span>
+            <span>Reviews</span>
+          </nav>
+          <p id="current-date"></p>
+        </div>
+      </header>
+
+      <!-- Reviews List -->
+      <section class="admin-section">
+        <div class="section-header">
+          <div class="section-controls">
+            <select id="rating-filter" class="form-select">
+              <option value="">All Ratings</option>
+              <option value="5">5 Stars</option>
+              <option value="4">4 Stars</option>
+              <option value="3">3 Stars</option>
+              <option value="2">2 Stars</option>
+              <option value="1">1 Star</option>
+            </select>
+            <button class="btn btn-secondary" id="export-reviews">
+              <i class="fas fa-download"></i> Export
+            </button>
+          </div>
+        </div>
+
+        <!-- Reviews Grid View -->
+        <div class="reviews-grid" id="reviews-view">
+          <!-- Review cards will be dynamically inserted here -->
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-wrapper">
+          <div class="pagination-info" id="pagination-info">
+            <!-- Populated by JS -->
+          </div>
+          <div class="pagination" id="pagination-controls">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Review Modal -->
+    <div id="review-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Review Details</h3>
+                <span class="close" onclick="reviewManager.closeReviewModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="review-details">
+                    <div class="customer-info">
+                        <img src="" alt="Customer Avatar" class="customer-avatar" id="modal-customer-avatar">
+                        <div>
+                            <div class="customer-name" id="modal-customer-name"></div>
+                            <div class="review-date" id="modal-date"></div>
+                        </div>
+                    </div>
+
+                    <div class="product-info">
+                        <img src="" alt="Product Image" class="product-thumbnail" id="modal-product-image">
+                        <div class="product-name" id="modal-product-name"></div>
+                    </div>
+
+                    <div class="review-rating" id="modal-rating">
+                    </div>
+
+                    <p class="review-comment" id="modal-comment"></p>
+                    <div class="review-status" id="modal-status"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+  <script src="reviews.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
